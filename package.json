@@ -1,7 +1,7 @@
 {
   "name": "hotel-search-react",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "index.jsx",
   "author": "kinjoyuji <kinjoyuji@gmail.com>",
   "license": "MIT",
   "scripts": {
