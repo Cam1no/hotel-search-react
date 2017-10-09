@@ -10,6 +10,7 @@ class App extends Component {
   render() {
     return (
       <div>
+        <h1>緯度経度検索</h1>
       </div>
     );
   }
