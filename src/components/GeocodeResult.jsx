@@ -1,18 +1,23 @@
-import React, { Component } from 'react';
+import React, { PropTypes } from 'react';
 
-class GeocodeResult extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-    };
-  }
+const GeocodeResult = ({ address, lat, lng }) => (
+  <ul className="geocode-result">
+    <li>住所: {address}</li>
+    <li>緯度: {lat}</li>
+    <li>経度: {lng}</li>
+  </ul>
+);
 
-  render() {
-    return (
-      <div>
-      </div>
-    );
-  }
-}
+GeocodeResult.propTypes = {
+  address: PropTypes.string,
+  lat: PropTypes.number,
+  lng: PropTypes.number,
+};
+
+GeocodeResult.defaultProps = {
+  address: '',
+  lat: 0,
+  lng: 0,
+};
 
 export default GeocodeResult;
