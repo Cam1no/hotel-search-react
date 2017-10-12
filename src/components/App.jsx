@@ -14,16 +14,30 @@ class App extends Component {
   }
 
   handlePlaceSubmit(place) {
-    axios.get(GEOCODE_ENDPOINT, { params: { address: place } })
+    axios
+      .get(GEOCODE_ENDPOINT, { params: { address: place } })
       .then(results => {
         console.log(results);
-        const result = results.data.results[0];
-        const location = result.geometry.location;
-        this.setState({
-          address: result.formatted_address,
-          lat: location.lat,
-          lng: location.lng,
-        });
+        const data = results.data
+        const result = data.results[0];
+        switch (data.status) {
+          case 'OK': {
+            const location = result.geometry.location;
+            this.setState({
+              address: result.formatted_address,
+              lat: location.lat,
+              lng: location.lng,
+            });
+            break;
+          }
+          case 'ZERO_RESULTS': {
+            this.setState({
+              address: '結果が見つかりませんでした',
+              lat: 0,
+              lng: 0,
+            });
+          }
+        }
       });
   }
 
