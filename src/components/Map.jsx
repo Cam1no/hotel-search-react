@@ -25,13 +25,8 @@ const Map = ({ lat, lng }) => {
 };
 
 Map.propTypes = {
-  lat: PropTypes.number,
-  lng: PropTypes.number,
-};
-
-Map.defaultProps = {
-  lat: -34.397,
-  lng: 150.644,
+  lat: PropTypes.number.isRequired,
+  lng: PropTypes.number.isRequired,
 };
 
 export default Map;
