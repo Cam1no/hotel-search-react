@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 
 import SearchForm from './SearchForm';
 import GeocodeResult from './GeocodeResult';
-import Map from './Map'
-
-const GEOCODE_ENDPOINT = 'http://maps.googleapis.com/maps/api/geocode/json'
+import Map from './Map';
+import { geocoder } from '../domain/Geocoder';
 
 class App extends Component {
   constructor(props) {
@@ -29,18 +27,11 @@ class App extends Component {
   }
 
   handlePlaceSubmit(place) {
-    axios
-      .get(GEOCODE_ENDPOINT, { params: { address: place } })
-      .then(results => {
-        console.log(results);
-        const data = results.data
-        const result = data.results[0];
-        switch (data.status) {
+    geocoder(place)
+      .then(({ status, address, location }) => {
+        switch (status) {
           case 'OK': {
-            this.setState({
-              address: result.formatted_address,
-              location: result.geometry.location,
-            });
+            this.setState({address, location});
             break;
           }
           case 'ZERO_RESULTS': {
